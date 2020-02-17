@@ -131,10 +131,26 @@ const osmPoi = (f) => {
 
 const lut = {
   // 1. nature
+  un_glc30_global_lc_ss: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 6,
+      maxzoom: 8
+    }
+    return f
+  },
+  un_glc30_global_lc_ms: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 9,
+      maxzoom: 11
+    }
+    return f
+  },
   un_mission_lc_ls: f => {
     f.tippecanoe = {
       layer: 'nature',
-      minzoom: 11,
+      minzoom: 12,
       maxzoom: 15
     }
     return f
@@ -192,35 +208,54 @@ const lut = {
     delete f.properties['fclass']
     return f
   },
+  osm_planet_landuse_park_reserve: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: flap(f, 15),
+      maxzoom: 15
+    }
+    switch (f.properties.fclass) {
+      case 'national_park':
+        f.properties.boundary = f.properties.fclass
+        break
+      case 'nature_reserve':
+        f.properties.leisure = f.properties.fclass
+        break
+      default:
+        throw new Error(`osm_planet_landuse_park_reserve: ${f.properties.fclass}`)
+    }
+    delete f.properties['fclass']
+    return f
+  },
+  un_srtm90_global_hs_ss: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 6,
+      maxzoom: 7
+    }
+    return f
+  },
+  un_srtm30r_global_hs_ms: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 8,
+      maxzoom: 9
+    }
+    return f
+  },
   // 2. water
   custom_planet_ocean_l08: f => {
     f.tippecanoe = {
       layer: 'water',
       minzoom: 6,
-      maxzoom: 8
+      maxzoom: 9
     }
     return f
   },
   custom_planet_ocean: f => {
     f.tippecanoe = {
       layer: 'water',
-      minzoom: 9,
-      maxzoom: 15
-    } 
-    return f
-  },
-  custom_planet_land_a_l08: f => {
-    f.tippecanoe = {
-      layer: 'land',
-      minzoom: 6,
-      maxzoom: 8
-    }
-    return f
-  },
-  custom_planet_land_a: f => {
-    f.tippecanoe = {
-      layer: 'land',
-      minzoom: 9,
+      minzoom: 10,
       maxzoom: 15
     } 
     return f
@@ -280,7 +315,7 @@ const lut = {
   // 3. boundary
   unhq_bndl25: f => {
     f.tippecanoe = {
-      layer: 'hq_bnd',
+      layer: 'boundary',
       minzoom: 6,
       maxzoom: 7
     }
@@ -288,7 +323,7 @@ const lut = {
   },
   unhq_bndl05: f => {
     f.tippecanoe = {
-      layer: 'hq_bnd',
+      layer: 'boundary',
       minzoom: 8,
       maxzoom: 9
     }
@@ -296,73 +331,25 @@ const lut = {
   },
   unhq_bndl: f => {
     f.tippecanoe = {
-      layer: 'hq_bnd',
+      layer: 'boundary',
       minzoom: 10,
-      maxzoom: 15
-    }
-    return f
-  },
-  unhq_bnda_a1: f => {
-    f.tippecanoe = {
-      layer: 'hq_bnd',
-      minzoom: 6,
-      maxzoom: 9
-    }
-    return f
-  },
-  unhq_bnda_a2: f => {
-    f.tippecanoe = {
-      layer: 'hq_bnd',
-      minzoom: 10,
-      maxzoom: 15
-    }
-    return f
-  },
-  custom_unmap_0_bnda_a1: f => {
-    f.tippecanoe = {
-      layer: 'c_bnd',
-      minzoom: 6,
-      maxzoom: 9
-    }
-    return f
-  },
-  custom_unmap_0_bnda_a2: f => {
-    f.tippecanoe = {
-      layer: 'c_bnd',
-      minzoom: 10,
-      maxzoom: 15
-    }
-    return f
-  },
-  un_unmik_bnda_a3: f => {
-    f.tippecanoe = {
-      layer: 'mik_bnd',
-      minzoom: 10,
-      maxzoom: 12
-    }
-    return f
-  },
-  un_unmik_bndl: f => {
-    f.tippecanoe = {
-      layer: 'mik_bnd',
-      minzoom: 9,
-      maxzoom: 15
-    }
-    return f
-  },
-  unhq_bnda_cty: f => {
-    f.tippecanoe = {
-      layer: 'bnd_cty',
-      minzoom: 6,
-      maxzoom: 8
-    }
-    return f
-  },
-  unhq_bnda25_cty: f => {
-    f.tippecanoe = {
-      layer: 'bnd25_cty',
-      minzoom: 6,
       maxzoom: 11
+    }
+    return f
+  },
+  custom_unmap_0_bndl_a1: f => {
+    f.tippecanoe = {
+      layer: 'boundary',
+      minzoom: 12,
+      maxzoom: 13
+    }
+    return f
+  },
+  custom_unmap_0_bndl_a2: f => {
+    f.tippecanoe = {
+      layer: 'boundary',
+      minzoom: 14,
+      maxzoom: 15
     }
     return f
   },
@@ -387,6 +374,38 @@ const lut = {
     delete f.properties['fclass']
     return f
   },
+  un_unifil_roads: f => {
+    f.tippecanoe = {
+      layer: 'road',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f
+  },
+  un_onuci_roads: f => {
+    f.tippecanoe = {
+      layer: 'road',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f
+  },
+  un_unsos_roads: f => {
+    f.tippecanoe = {
+      layer: 'road',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f
+  },
+  un_minusca_roads: f => {
+    f.tippecanoe = {
+      layer: 'road',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f
+  },
   // 5. railway
   osm_planet_railways: f => {
     f.tippecanoe = {
@@ -402,7 +421,7 @@ const lut = {
   osm_planet_ferries: f => {
     f.tippecanoe = {
       layer: 'route',
-      minzoom: 8,
+      minzoom: 11,
       maxzoom: 15
     }
     f.properties.route = f.properties.fclass
@@ -413,45 +432,10 @@ const lut = {
   osm_planet_runways: f => {
     f.tippecanoe = {
       layer: 'structure',
-      minzoom: 13,
+      minzoom: 10,
       maxzoom: 15
     }
     f.properties.aeroway = f.properties.fclass
-    delete f.properties['fclass']
-    return f
-  },
-  osm_planet_highway_areas: f => {
-    f.tippecanoe = {
-      layer: 'structure',
-      minzoom: flap(f, 10),
-      maxzoom: 15
-    }
-    switch (f.properties.fclass) {
-      case 'airport':
-      case 'bus_station':
-      case 'ferry_terminal':
-        f.properties.amenity = f.properties.fclass
-        break
-      case 'aerodrome':
-      case 'airfield':
-      case 'helipad':
-      case 'aeroway':
-        f.properties.aeroway = f.properties.fclass
-        break
-      case 'station':
-      case 'halt':
-      case 'tram_stop':
-        f.properties.railway = f.properties.fclass
-        break
-      case 'stop_position':
-        f.properties.public_transport = f.properties.fclass
-        break
-      case 'bus_stop':
-        f.properties.highway = f.properties.fclass
-        break
-      default:
-        throw new Error(`osm_planet_transport_areas: ${f.properties.fclass}`)
-    }
     delete f.properties['fclass']
     return f
   },
@@ -495,14 +479,14 @@ const lut = {
     f.tippecanoe = {
       layer: 'building',
       minzoom: flap(f, 12),
-      maxzoom: 15
+      maxzoom: 12
     }
     if (f.tippecanoe.minzoom > 12) f.tippecanoe.minzoom = 12
     f.properties.landuse = f.properties.fclass
     delete f.properties['fclass']
     return f
   },
-  osm_planet_other_buildings: f => {
+  osm_planet_buildings_general: f => {
     f.tippecanoe = {
       layer: 'building',
       minzoom: flap(f, 15),
@@ -513,6 +497,25 @@ const lut = {
     return f
   },
   // 9. place
+  unhq_bndp: f => {
+    f.tippecanoe = {
+      layer: 'place',
+      minzoom: 8,
+      maxzoom: 15
+    }
+    f.properties._source = 'unhq_bndp' // FIXME
+    return f
+  },
+  osm_planet_places_areas: f => {
+    f.tippecanoe = {
+      layer: 'place',
+      minzoom: flap(f, 14),
+      mazoom: 15
+    }
+    f.properties.place = f.properties.fclass
+    delete f.properties['fclass']
+    return f
+  },
   osm_planet_pois_heritage: f => {
     switch (f.properties.fclass) {
       case 'theatre':
@@ -747,8 +750,8 @@ const lut = {
   unhq_popp: f => {
     f.tippecanoe = {
       layer: 'place',
-      minzoom: 5,
-      maxzoom: 12
+      minzoom: 8,
+      maxzoom: 15
     }
     f.properties._source = 'unhq_popp'
     return f
@@ -756,28 +759,10 @@ const lut = {
   un_global_places: f => {
     f.tippecanoe = {
       layer: 'place',
-      minzoom: 7,
-      maxzoom: 15
-    }
-    f.properties._source = 'un_global_places'
-    return f
-  },
-  un_phyp: f => {
-    f.tippecanoe = {
-      layer: 'place',
-      minzoom: 7,
-      maxzoom: 15
-    }
-    f.properties._source = 'un_phyp'
-    return f
-  },
-  un_minusca_pois: f => {
-    f.tippecanoe = {
-      layer: 'place',
       minzoom: 8,
       maxzoom: 15
     }
-    f.properties._source = 'un_minusca_pois'
+    f.properties._source = 'un_global_places'
     return f
   },
   un_global_pois: f => {
@@ -790,6 +775,7 @@ const lut = {
     return f
   }
 }
+
 module.exports = (f) => {
   return postProcess(lut[f.properties._table](preProcess(f)))
 }
