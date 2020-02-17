@@ -54,7 +54,9 @@ let productionSpinner = new Spinner()
 let moduleKeysInProgress = []
 
 // start the monitor
-sar = spawn( [ `sar -b ${monitorPeriod}`
+sar = spawn('ssh', [
+  '-l', unixUser,
+  host, `sar -b ${monitorPeriod}`
 ], { stdio: ['inherit', 'pipe', 'pipe'] })
 byline(sar.stdout).on('data', line => {
   wtps =
@@ -69,7 +71,9 @@ const isIdle = () => {
 const checkExpiretiles = (date) => {
   return new Promise((resolve, reject) => {
     const dateKey = date.toISOString().split('T')[0].replace(/-/g, '')
-    const cat = spawn( [`cat /osm_base/expiretiles/${dateKey}/` + '*'
+    const cat = spawn('ssh', [
+      '-l', unixUser,
+      host, `cat /osm_base/expiretiles/${dateKey}/` + '*'
     ], { stdio: ['inherit', 'pipe', 'ignore'] })
     byline(cat.stdout).on('data', line => {
       let zxy = line.toString().split('/').map(v => Number(v))
