@@ -1,5 +1,5 @@
 {
-  "name": "prototype11",
+  "name": "11-produce",
   "version": "1.0.0",
   "description": "the eleventh prototype",
   "main": "index.js",
@@ -8,15 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hfu/prototype11.git"
+    "url": "git+https://github.com/ubukawa/11-produce.git"
   },
   "keywords": [],
   "author": "",
   "license": "Unlicense",
-  "bugs": {
-    "url": "https://github.com/hfu/prototype11/issues"
-  },
-  "homepage": "https://github.com/hfu/prototype11#readme",
   "dependencies": {
     "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/tilebelt": "^1.0.1",
