@@ -1,0 +1,73 @@
+{
+  host: localhost
+  unixUser: test\taro.ubukawa
+  wtpsThreshold: 50
+  monitorPeriod: 10
+  Z: 6
+  concurrent: 1
+  maxRetries: 5
+  retryDelay: 5000
+  dbUser: postgress
+  dbPassword: ABCDEFG
+  relations: [
+    un_base::un_glc30_global_lc_ss
+    un_base::un_glc30_global_lc_ms
+    un_base::un_mission_lc_ls
+    osm_base::osm_planet_landuse_natural_large
+    osm_base::osm_planet_landuse_natural_medium
+    osm_base::osm_planet_landuse_park_reserve
+    un_base::un_srtm90_global_hs_ss
+    un_base::un_srtm30r_global_hs_ms
+    un_base::custom_planet_ocean_l08
+    un_base::custom_planet_ocean
+    osm_base::osm_planet_water
+    un_base::custom_ne_rivers_lakecentrelines
+    osm_base::osm_planet_waterways_small
+    osm_base::osm_planet_waterways_large
+    un_base::custom_unmap_0_bndl_a1
+    un_base::custom_unmap_0_bndl_a2
+    un_base::unhq_bndl25
+    un_base::unhq_bndl05
+    un_base::unhq_bndl
+    osm_base::osm_planet_major_roads
+    osm_base::osm_planet_minor_roads
+    un_base::un_unifil_roads
+    un_base::un_onuci_roads
+    un_base::un_unsos_roads
+    un_base::un_minusca_roads
+    osm_base::osm_planet_railways
+    osm_base::osm_planet_ferries
+    osm_base::osm_planet_runways
+    osm_base::osm_planet_transport_areas
+    osm_base::osm_planet_landuse_urban
+    osm_base::osm_planet_buildings_general
+    un_base::unhq_bndp
+    osm_base::osm_planet_places_areas
+    osm_base::osm_planet_pois_heritage
+    osm_base::osm_planet_pois_other
+    osm_base::osm_planet_pois_public
+    osm_base::osm_planet_pois_services
+    osm_base::osm_planet_pois_traffic
+    osm_base::osm_planet_pois_transport
+    osm_base::osm_planet_pois_water
+    osm_base::osm_planet_pois_worship
+    un_base::unhq_popp
+    un_base::un_global_places
+    un_base::un_global_pois
+  ]
+  defaultDate: 2020-02-01
+  mbtilesDir: /data/mbtiles/prototype11
+  propertyBlacklist: [
+    description
+    fid
+    fid_1
+    globalid
+    id
+    objectid
+    objectid_1
+    osm_id
+    pseudoarea
+  ]
+  spinnerString: 18
+  fetchSize: 100
+}
