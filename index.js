@@ -16,6 +16,7 @@ const modify = require('./modify.js')
 
 // config constants
 const host = config.get('host')
+const port = config.get('port') 
 const unixUser = config.get('unixUser')
 const wtpsThreshold = config.get('wtpsThreshold')
 const monitorPeriod = config.get('monitorPeriod')
@@ -36,7 +37,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: 'prototype11-%DATE%.log',
+      filename: 'produce11-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'
@@ -53,38 +54,38 @@ let pools = {}
 let productionSpinner = new Spinner()
 let moduleKeysInProgress = []
 
-// start the monitor
-sar = spawn( 'ssh', [ `sar -b ${monitorPeriod}`
-], { stdio: ['inherit', 'pipe', 'pipe'] })
-byline(sar.stdout).on('data', line => {
-  wtps =
-    line.toString().split(/\s+/).map(v => Number(v))[4]
-  if (Number.isNaN(wtps)) return
-  idle = wtps < wtpsThreshold
-})
-const isIdle = () => {
-  return idle
-}
+// start the monitor (note: powershell does not have this command)
+//sar = spawn( 'ssh', [ `sar -b ${monitorPeriod}`
+//], { stdio: ['inherit', 'pipe', 'pipe'] })
+//byline(sar.stdout).on('data', line => {
+//  wtps =
+//    line.toString().split(/\s+/).map(v => Number(v))[4]
+//  if (Number.isNaN(wtps)) return
+//  idle = wtps < wtpsThreshold
+//})
+//const isIdle = () => {
+//  return idle
+//}
 
-const checkExpiretiles = (date) => {
-  return new Promise((resolve, reject) => {
-    const dateKey = date.toISOString().split('T')[0].replace(/-/g, '')
-    const cat = spawn( 'ssh', [`cat /osm_base/expiretiles/${dateKey}/` + '*'
-    ], { stdio: ['inherit', 'pipe', 'ignore'] })
-    byline(cat.stdout).on('data', line => {
-      let zxy = line.toString().split('/').map(v => Number(v))
-      let Zxy = [6, zxy[1] >> (zxy[0] - Z), zxy[2] >> (zxy[0] - Z)]
-      let moduleKey = Zxy.join('-')
-      if (modules.hasOwnProperty(moduleKey) && modules[moduleKey].mtime <= date) {
-        modules[moduleKey].score += // 'Africa premium'
-          (Zxy[1] >= 27 && Zxy[1] <= 42 && Zxy[2] >= 24 && Zxy[2] <= 38) ? 10 : 1
-      }
-    })
-    cat.on('exit', () => {
-      resolve()
-    })
-  })
-}
+//const checkExpiretiles = (date) => {
+//  return new Promise((resolve, reject) => {
+//    const dateKey = date.toISOString().split('T')[0].replace(/-/g, '')
+//    const cat = spawn( 'ssh', [`cat /osm_base/expiretiles/${dateKey}/` + '*'
+//    ], { stdio: ['inherit', 'pipe', 'ignore'] })
+//    byline(cat.stdout).on('data', line => {
+//      let zxy = line.toString().split('/').map(v => Number(v))
+//      let Zxy = [6, zxy[1] >> (zxy[0] - Z), zxy[2] >> (zxy[0] - Z)]
+//      let moduleKey = Zxy.join('-')
+//      if (modules.hasOwnProperty(moduleKey) && modules[moduleKey].mtime <= date) {
+//        modules[moduleKey].score += // 'Africa premium'
+//          (Zxy[1] >= 27 && Zxy[1] <= 42 && Zxy[2] >= 24 && Zxy[2] <= 38) ? 10 : 1
+//      }
+//    })
+//    cat.on('exit', () => {
+//      resolve()
+//    })
+//  })
+//}
 
 const getScores = async () => {
   return new Promise(async (resolve, reject) => {
