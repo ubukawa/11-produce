@@ -87,50 +87,50 @@ let moduleKeysInProgress = []
 //  })
 //}
 
-const getScores = async () => {
-  return new Promise(async (resolve, reject) => {
-    // identify modules to update
-    let oldestDate = new Date()
-    for (let x = 0; x < 2 ** Z; x++) {
-      for (let y = 0; y < 2 ** Z; y++) {
-        const moduleKey = `${Z}-${x}-${y}`
-        const path = `${mbtilesDir}/${moduleKey}.mbtiles`
-        let mtime = defaultDate
-        let size = 0
-        if (fs.existsSync(path)) {
-          let stat = fs.statSync(path)
-          mtime = stat.mtime
-          size = stat.size
-        }
-        oldestDate = (oldestDate < mtime) ? oldestDate : mtime
-        modules[`${Z}-${x}-${y}`] = {
-          mtime: mtime,
-          size: size,
-          score: 0
-        }
-      }
-    }
-
-    oldestDate.setUTCHours(0)
-    oldestDate.setUTCMinutes(0)
-    oldestDate.setUTCSeconds(0)
-    oldestDate.setUTCMilliseconds(0)
-
-    const now = new Date()
-    for (let date = oldestDate; date < now; date.setDate(date.getDate() + 1)) {
-      const spinner = new Spinner(`scoring modules by ${date.toISOString().split('T')[0]}`)
-      spinner.start()
-      await checkExpiretiles(date)
-      spinner.stop()
-      process.stdout.write('\n')
-    }
-    resolve()
-  })
-}
-
-const iso = () => {
-  return (new Date()).toISOString()
-}
+//const getScores = async () => {
+//  return new Promise(async (resolve, reject) => {
+//    // identify modules to update
+//    let oldestDate = new Date()
+//    for (let x = 0; x < 2 ** Z; x++) {
+//      for (let y = 0; y < 2 ** Z; y++) {
+//        const moduleKey = `${Z}-${x}-${y}`
+//       const path = `${mbtilesDir}/${moduleKey}.mbtiles`
+//        let mtime = defaultDate
+//        let size = 0
+//        if (fs.existsSync(path)) {
+//          let stat = fs.statSync(path)
+//          mtime = stat.mtime
+//          size = stat.size
+//        }
+//        oldestDate = (oldestDate < mtime) ? oldestDate : mtime
+//        modules[`${Z}-${x}-${y}`] = {
+//          mtime: mtime,
+//          size: size,
+//         score: 0
+//       }
+//      }
+//    }
+//
+//    oldestDate.setUTCHours(0)
+//    oldestDate.setUTCMinutes(0)
+//    oldestDate.setUTCSeconds(0)
+//    oldestDate.setUTCMilliseconds(0)
+//
+//    const now = new Date()
+//    for (let date = oldestDate; date < now; date.setDate(date.getDate() + 1)) {
+//      const spinner = new Spinner(`scoring modules by ${date.toISOString().split('T')[0]}`)
+//      spinner.start()
+//      await checkExpiretiles(date)
+//      spinner.stop()
+//      process.stdout.write('\n')
+//    }
+//    resolve()
+//  })
+//}
+//
+//const iso = () => {
+//  return (new Date()).toISOString()
+//}
 
 const noPressureWrite = (downstream, f) => {
   return new Promise((res) => {
