@@ -54,80 +54,80 @@ let pools = {}
 let productionSpinner = new Spinner()
 let moduleKeysInProgress = []
 
-// start the monitor (note: powershell does not have this command)
-//sar = spawn( 'ssh', [ `sar -b ${monitorPeriod}`
-//], { stdio: ['inherit', 'pipe', 'pipe'] })
-//byline(sar.stdout).on('data', line => {
-//  wtps =
-//    line.toString().split(/\s+/).map(v => Number(v))[4]
-//  if (Number.isNaN(wtps)) return
-//  idle = wtps < wtpsThreshold
-//})
-//const isIdle = () => {
-//  return idle
-//}
+// start the monitor //(note: edited here)
+sar = spawn( 'sar', [ `-b ${monitorPeriod}`
+], { stdio: ['inherit', 'pipe', 'pipe'] })
+byline(sar.stdout).on('data', line => {
+  wtps =
+    line.toString().split(/\s+/).map(v => Number(v))[4]
+  if (Number.isNaN(wtps)) return
+  idle = wtps < wtpsThreshold
+})
+const isIdle = () => {
+  return idle
+}
 
-//const checkExpiretiles = (date) => {
-//  return new Promise((resolve, reject) => {
-//    const dateKey = date.toISOString().split('T')[0].replace(/-/g, '')
-//    const cat = spawn( 'ssh', [`cat /osm_base/expiretiles/${dateKey}/` + '*'
-//    ], { stdio: ['inherit', 'pipe', 'ignore'] })
-//    byline(cat.stdout).on('data', line => {
-//      let zxy = line.toString().split('/').map(v => Number(v))
-//      let Zxy = [6, zxy[1] >> (zxy[0] - Z), zxy[2] >> (zxy[0] - Z)]
-//      let moduleKey = Zxy.join('-')
-//      if (modules.hasOwnProperty(moduleKey) && modules[moduleKey].mtime <= date) {
-//        modules[moduleKey].score += // 'Africa premium'
-//          (Zxy[1] >= 27 && Zxy[1] <= 42 && Zxy[2] >= 24 && Zxy[2] <= 38) ? 10 : 1
-//      }
-//    })
-//    cat.on('exit', () => {
-//      resolve()
-//    })
-//  })
-//}
+const checkExpiretiles = (date) => {
+  return new Promise((resolve, reject) => {
+    const dateKey = date.toISOString().split('T')[0].replace(/-/g, '')
+    const cat = spawn( 'ssh', [`cat /osm_base/expiretiles/${dateKey}/` + '*'
+    ], { stdio: ['inherit', 'pipe', 'ignore'] })
+    byline(cat.stdout).on('data', line => {
+      let zxy = line.toString().split('/').map(v => Number(v))
+      let Zxy = [6, zxy[1] >> (zxy[0] - Z), zxy[2] >> (zxy[0] - Z)]
+      let moduleKey = Zxy.join('-')
+      if (modules.hasOwnProperty(moduleKey) && modules[moduleKey].mtime <= date) {
+        modules[moduleKey].score += // 'Africa premium'
+          (Zxy[1] >= 27 && Zxy[1] <= 42 && Zxy[2] >= 24 && Zxy[2] <= 38) ? 10 : 1
+      }
+    })
+    cat.on('exit', () => {
+      resolve()
+    })
+  })
+}
 
-//const getScores = async () => {
-//  return new Promise(async (resolve, reject) => {
-//    // identify modules to update
-//    let oldestDate = new Date()
-//    for (let x = 0; x < 2 ** Z; x++) {
-//      for (let y = 0; y < 2 ** Z; y++) {
-//        const moduleKey = `${Z}-${x}-${y}`
-//       const path = `${mbtilesDir}/${moduleKey}.mbtiles`
-//        let mtime = defaultDate
-//        let size = 0
-//        if (fs.existsSync(path)) {
-//          let stat = fs.statSync(path)
-//          mtime = stat.mtime
-//          size = stat.size
-//        }
-//        oldestDate = (oldestDate < mtime) ? oldestDate : mtime
-//        modules[`${Z}-${x}-${y}`] = {
-//          mtime: mtime,
-//          size: size,
-//         score: 0
-//       }
-//      }
-//    }
-//
-//    oldestDate.setUTCHours(0)
-//    oldestDate.setUTCMinutes(0)
-//    oldestDate.setUTCSeconds(0)
-//    oldestDate.setUTCMilliseconds(0)
-//
-//    const now = new Date()
-//    for (let date = oldestDate; date < now; date.setDate(date.getDate() + 1)) {
-//      const spinner = new Spinner(`scoring modules by ${date.toISOString().split('T')[0]}`)
-//      spinner.start()
-//      await checkExpiretiles(date)
-//      spinner.stop()
-//      process.stdout.write('\n')
-//    }
-//    resolve()
-//  })
-//}
-//
+const getScores = async () => {
+  return new Promise(async (resolve, reject) => {
+    // identify modules to update
+    let oldestDate = new Date()
+    for (let x = 0; x < 2 ** Z; x++) {
+      for (let y = 0; y < 2 ** Z; y++) {
+        const moduleKey = `${Z}-${x}-${y}`
+       const path = `${mbtilesDir}/${moduleKey}.mbtiles`
+        let mtime = defaultDate
+        let size = 0
+        if (fs.existsSync(path)) {
+          let stat = fs.statSync(path)
+          mtime = stat.mtime
+          size = stat.size
+        }
+        oldestDate = (oldestDate < mtime) ? oldestDate : mtime
+        modules[`${Z}-${x}-${y}`] = {
+          mtime: mtime,
+          size: size,
+         score: 0
+       }
+      }
+    }
+
+    oldestDate.setUTCHours(0)
+    oldestDate.setUTCMinutes(0)
+    oldestDate.setUTCSeconds(0)
+    oldestDate.setUTCMilliseconds(0)
+
+    const now = new Date()
+    for (let date = oldestDate; date < now; date.setDate(date.getDate() + 1)) {
+      const spinner = new Spinner(`scoring modules by ${date.toISOString().split('T')[0]}`)
+      spinner.start()
+      await checkExpiretiles(date)
+      spinner.stop()
+      process.stdout.write('\n')
+    }
+    resolve()
+  })
+}
+
 const iso = () => {
   return (new Date()).toISOString()
 }
