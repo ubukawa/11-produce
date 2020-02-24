@@ -55,14 +55,14 @@ let productionSpinner = new Spinner()
 let moduleKeysInProgress = []
 
 // start the monitor //(note: edited here)
-sar = spawn( 'sar', [ `-b ${monitorPeriod}`
-], { stdio: ['inherit', 'pipe', 'pipe'] })
-byline(sar.stdout).on('data', line => {
-  wtps =
-    line.toString().split(/\s+/).map(v => Number(v))[4]
-  if (Number.isNaN(wtps)) return
-  idle = wtps < wtpsThreshold
-})
+//sar = spawn( 'sar', [ `-b ${monitorPeriod}`
+//], { stdio: ['inherit', 'pipe', 'pipe'] })
+//byline(sar.stdout).on('data', line => {
+//  wtps =
+//    line.toString().split(/\s+/).map(v => Number(v))[4]
+//  if (Number.isNaN(wtps)) return
+//  idle = wtps < wtpsThreshold
+//})
 const isIdle = () => {
   return idle
 }
