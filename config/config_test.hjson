@@ -1,0 +1,30 @@
+{
+  host: localhost
+  unixUser: test\taro.ubukawa
+  wtpsThreshold: 50
+  monitorPeriod: 10
+  Z: 6
+  concurrent: 1
+  maxRetries: 5
+  retryDelay: 5000
+  dbUser: postgress
+  dbPassword: ABCDEFG
+  relations: [
+    un_base::unhq_bnda25_cty
+  ]
+  defaultDate: 2020-02-01
+  mbtilesDir: /data/mbtiles/prototype11
+  propertyBlacklist: [
+    description
+    fid
+    fid_1
+    globalid
+    id
+    objectid
+    objectid_1
+    osm_id
+    pseudoarea
+  ]
+  spinnerString: 18
+  fetchSize: 100
+}

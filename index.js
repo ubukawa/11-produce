@@ -128,9 +128,9 @@ let moduleKeysInProgress = []
 //  })
 //}
 //
-//const iso = () => {
-//  return (new Date()).toISOString()
-//}
+const iso = () => {
+  return (new Date()).toISOString()
+}
 
 const noPressureWrite = (downstream, f) => {
   return new Promise((res) => {
