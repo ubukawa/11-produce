@@ -187,6 +187,7 @@ const dumpAndModify = async (bbox, relation, downstream, moduleKey) => {
       pools[database] = new Pool({
         host: host,
         user: dbUser,
+        port: port,
         password: dbPassword,
         database: database
       })
