@@ -120,7 +120,7 @@ const getScores = async () => {
     for (let date = oldestDate; date < now; date.setDate(date.getDate() + 1)) {
       const spinner = new Spinner(`scoring modules by ${date.toISOString().split('T')[0]}`)
       spinner.start()
-      await checkExpiretiles(date)
+//      await checkExpiretiles(date)
       spinner.stop()
       process.stdout.write('\n')
     }
