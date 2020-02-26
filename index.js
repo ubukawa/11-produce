@@ -37,7 +37,7 @@ winston.configure({
   format: winston.format.simple(),
   transports: [ 
     new DailyRotateFile({
-      filename: 'produce11-%DATE%.log',
+      filename: '11-produce-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       maxFiles: '14d'
