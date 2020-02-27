@@ -37,23 +37,37 @@
     un_base::unhq_bndl25
     un_base::unhq_phyp
     un_base::unhq_popp
+    osm_base::osm_planet_worship_area_p
+    osm_base::osm_planet_barrier_lines
     osm_base::osm_planet_ferries
+    osm_base::osm_planet_heritage_area_p
     osm_base::osm_planet_highway_areas
     osm_base::osm_planet_landuse_natural_large
     osm_base::osm_planet_landuse_natural_medium
+    osm_base::osm_planet_landuse_park_reserve
+    osm_base::osm_planet_landuse_points
     osm_base::osm_planet_landuse_urban
     osm_base::osm_planet_major_roads
     osm_base::osm_planet_minor_roads
+    osm_base::osm_planet_other_area_p
+    osm_base::osm_planet_other_buildings
+    osm_base::osm_planet_places
+    osm_base::osm_planet_places_areas
     osm_base::osm_planet_pois_heritage
     osm_base::osm_planet_pois_other
     osm_base::osm_planet_pois_public
+    osm_base::osm_planet_pois_services
     osm_base::osm_planet_pois_traffic
     osm_base::osm_planet_pois_transport
     osm_base::osm_planet_pois_water
     osm_base::osm_planet_pois_worship
+    osm_base::osm_planet_public_area_p
     osm_base::osm_planet_railways
     osm_base::osm_planet_runways
+    osm_base::osm_planet_services_area_p
+    osm_base::osm_planet_services_areas
     osm_base::osm_planet_transport_areas
+    osm_base::osm_planet_transport_area_p
     osm_base::osm_planet_water
     osm_base::osm_planet_waterways_large
     osm_base::osm_planet_waterways_small
