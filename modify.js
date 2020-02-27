@@ -251,17 +251,17 @@ const lut = {
   custom_ne_rivers_lakecentrelines: f => {
     f.tippecanoe = {
       layer: 'water',
-      minzoom: (f.properties.scalerank > 1) ? f.properties.scalerank : 10,
-      maxzoom: 10
+      minzoom: (f.properties.scalerank > 1) ? f.properties.scalerank : 6,
+      maxzoom: 6
     }
-    if (f.tippecanoe.minzoom > 10) f.tippecanoe.minzoom = 10
+    if (f.tippecanoe.minzoom > 6) f.tippecanoe.minzoom = 6
     return f
   },
   osm_planet_waterways_small: f => {
     f.tippecanoe = {
       layer: 'water',
-      minzoom: 11,
-      maxzoom: 13
+      minzoom: 10,
+      maxzoom: 12
     }
     f.properties.waterway = f.properties.fclass
     delete f.properties['fclass']
@@ -270,7 +270,7 @@ const lut = {
   osm_planet_waterways_large: f => {
     f.tippecanoe = {
       layer: 'water',
-      minzoom: 14,
+      minzoom: 13,
       maxzoom: 15
     }
     f.properties.waterway = f.properties.fclass
@@ -302,10 +302,18 @@ const lut = {
     }
     return f
   },
-  unhq_bnda_a1: f => {
+  unhq_bnda05_a1: f => {
     f.tippecanoe = {
       layer: 'hq_bnd',
       minzoom: 6,
+      maxzoom: 7
+    }
+    return f
+  }, 
+ unhq_bnda_a1: f => {
+    f.tippecanoe = {
+      layer: 'hq_bnd',
+      minzoom: 8,
       maxzoom: 9
     }
     return f
@@ -334,6 +342,22 @@ const lut = {
     }
     return f
   },
+  custom_unmap_0_bndl: f => {
+    f.tippecanoe = {
+      layer: 'c_bnd',
+      minzoom: 7,
+      maxzoom: 15
+    }
+    return f
+  },
+  un_unmik_bnda_a2: f => {
+    f.tippecanoe = {
+      layer: 'mik_bnd',
+      minzoom: 8,
+      maxzoom: 9
+    }
+    return f
+  },
   un_unmik_bnda_a3: f => {
     f.tippecanoe = {
       layer: 'mik_bnd',
@@ -350,19 +374,27 @@ const lut = {
     }
     return f
   },
-  unhq_bnda_cty: f => {
+  unhq_bnda05_cty: f => {
     f.tippecanoe = {
       layer: 'bnd_cty',
-      minzoom: 6,
-      maxzoom: 8
+      minzoom: 9,
+      maxzoom: 11
     }
     return f
   },
   unhq_bnda25_cty: f => {
     f.tippecanoe = {
-      layer: 'bnd25_cty',
-      minzoom: 6,
-      maxzoom: 11
+      layer: 'bnd_cty',
+      minzoom: 7,
+      maxzoom: 8
+    }
+    return f
+  },
+  unhq_bnda_cty: f => {
+    f.tippecanoe = {
+      layer: 'bnd_cty',
+      minzoom: 7,
+      maxzoom: 8
     }
     return f
   },
