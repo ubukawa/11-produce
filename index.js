@@ -313,7 +313,7 @@ const queueTasks = () => {
 const shutdown = () => {
   winston.info(`${iso()}: production system shutdown.`)
   console.log('** production system shutdown! **')
-  sar.kill()
+//  sar.kill()
 }
 
 const main = async () => {
