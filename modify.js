@@ -820,6 +820,102 @@ const lut = {
     }
     f.properties._source = 'un_global_pois'
     return f
+  },
+  osm_planet_worship_area_p: f => {
+    f.tippecanoe = {
+      layer: 'worshipap',
+      minzoom: 14,
+      maxzoom: 15
+    }
+    return f
+ },
+  osm_planet_barrier_lines: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f
+ },
+  osm_planet_heritage_area_p: f => {
+    f.tippecanoe = {
+      layer: 'heritagep',
+      minzoom: 15,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_landuse_park_reserve: f => {
+    f.tippecanoe = {
+      layer: 'reservea',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_landuse_points: f => {
+    f.tippecanoe = {
+      layer: 'nature',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_other_area_p: f => {
+    f.tippecanoe = {
+      layer: 'otherareap',
+      minzoom: 15,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_places: f => {
+    f.tippecanoe = {
+      layer: 'placep',
+      minzoom: 7,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_places_areas: f => {
+    f.tippecanoe = {
+      layer: 'areaa',
+      minzoom: 10,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_pois_services: f => {
+    f.tippecanoe = {
+      layer: 'servicep',
+      minzoom: 15,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_public_area_p: f => {
+    f.tippecanoe = {
+      layer: 'publicap',
+      minzoom: 13,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_service_area_p: f => {
+    f.tippecanoe = {
+      layer: 'serviceap',
+      minzoom: 13,
+      maxzoom: 15
+    }
+    return f 
+},
+  osm_planet_service_areas: f => {
+    f.tippecanoe = {
+      layer: 'servicea',
+      minzoom: 13,
+      maxzoom: 15
+    }
+    return f
   }
 }
 module.exports = (f) => {
