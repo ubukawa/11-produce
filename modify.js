@@ -392,7 +392,7 @@ const lut = {
   },
   unhq_bnda_cty: f => {
     f.tippecanoe = {
-      layer: 'bnd_cty',
+      layer: 'cty',
       minzoom: 7,
       maxzoom: 8
     }
