@@ -299,8 +299,8 @@ const queue = new Queue(async (t, cb) => {
 const queueTasks = () => {
   let moduleKeys = Object.keys(modules)
   moduleKeys.sort((a, b) => modules[b].score - modules[a].score)
-  for (let moduleKey of moduleKeys) {
-  //for (let moduleKey of ['6-37-31', '6-38-31', '6-37-32', '6-38-32']) { //// TEMP
+  //for (let moduleKey of moduleKeys) {
+  for (let moduleKey of ['6-37-31', '6-38-31', '6-37-32', '6-38-32']) { //// TEMP
     //if (modules[moduleKey].score > 0) {
       queue.push({
         moduleKey: moduleKey
