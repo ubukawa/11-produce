@@ -794,7 +794,7 @@ const lut = {
     f.properties._source = 'un_global_places'
     return f
   },
-  un_phyp: f => {
+  unhq_phyp: f => {
     f.tippecanoe = {
       layer: 'place',
       minzoom: 7,
