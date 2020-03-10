@@ -135,7 +135,7 @@ const lut = {
     }
     switch (f.properties.fclass) {
       case 'bare_rock':
-      case 'grass_land':
+      case 'grassland':
       case 'heath':
         f.properties.natural = f.properties.fclass
         break
