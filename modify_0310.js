@@ -9,13 +9,22 @@ const preProcess = (f) => {
   // name
   if (
     f.properties.hasOwnProperty('en_name') ||
+    f.properties.hasOwnProperty('fr_name') ||
+    f.properties.hasOwnProperty('es_name') ||
+    f.properties.hasOwnProperty('pt_name') ||
+    f.properties.hasOwnProperty('ar_name') ||
     f.properties.hasOwnProperty('int_name') ||
-    f.properties.hasOwnProperty('name') ||
-    f.properties.hasOwnProperty('ar_name')
+    f.properties.hasOwnProperty('name')
   ) {
     let name = ''
     if (f.properties['en_name']) {
       name = f.properties['en_name']
+    } else if (f.properties['fr_name']) {
+      name = f.properties['fr_name']
+    } else if (f.properties['es_name']) {
+      name = f.properties['es_name']
+    } else if (f.properties['pt_name']) {
+      name = f.properties['pt_name']
     } else if (f.properties['ar_name']) {
       name = f.properties['ar_name']
     } else if (f.properties['int_name']) {
@@ -24,6 +33,9 @@ const preProcess = (f) => {
       name = f.properties['name']
     }
     delete f.properties['en_name']
+    delete f.properties['fr_name']
+    delete f.properties['es_name']
+    delete f.properties['pt_name']
     delete f.properties['ar_name']
     delete f.properties['int_name']
     delete f.properties['name']
@@ -134,14 +146,12 @@ const lut = {
       maxzoom: 15
     }
     switch (f.properties.fclass) {
-      case 'bare_rock':
-      case 'grass_land':
       case 'heath':
         f.properties.natural = f.properties.fclass
         break
       case 'park':
       case 'common':
-    //  case 'recreation_ground':
+      // case 'recreation_ground':
         f.properties.leisure = f.properties.fclass
         break
       case 'meadow':
@@ -150,11 +160,6 @@ const lut = {
       case 'orchard':
       case 'vineyard':
       case 'quarry':
-      case 'farm':
-      case 'farmyard':
-      case 'grass':
-      case 'scrub':
-      case 'village_green':
         f.properties.landuse = f.properties.fclass
         break
       default:
